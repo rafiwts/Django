@@ -1,0 +1,19 @@
+{%extends "blog/base.html"%}
+
+{%block title%}Publish a post{%endblock%}
+
+{%block content%}
+    {%if sent%}
+        <h1>The email has been sent</h1>
+        <p>
+            Sending a post '{{ post.title }}' to {{ form.cleaned_data.to }} was successful.
+        </p>
+    {%else%}
+        <h1> Publish "{{ post.title }}" through e-mail</h1>
+        <form action="." method="post">
+            {{ form.as_p }}
+            {%csrf_token%} <!--cross-site request forgery, token is generated automatically for every POST method-->
+            <input type="submit" value="Sent an email">
+        </form>
+    {%endif%}
+{%endblock%}
