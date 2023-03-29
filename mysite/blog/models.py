@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
+from taggit.managers import TaggableManager
 
 
 class PublishedManager(models.Manager):
@@ -27,6 +28,7 @@ class Post(models.Model):
     
     objects = models.Manager() # returns all posts - Post.objects.filter()
     published = PublishedManager() # returns published posts defined in class PublishedManager - Post.published.filter()
+    tags = TaggableManager()
     
     class Meta: # it contains metadata - data sorted in descending order (because of '-') according to 'publish' column
         ordering = ('-publish',)
@@ -40,3 +42,21 @@ class Post(models.Model):
                               self.publish.month,
                               self.publish.day,
                               self.slug])
+    
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, 
+                             related_name='comments', 
+                             on_delete=models.CASCADE) # comment with a post
+    name = models.CharField(max_length=80)
+    email = models.EmailField()
+    body = models.TextField()
+    created = models.DateTimeField(auto_now_add=True) # sorting automatically
+    updated = models.DateTimeField(auto_now_add=True)
+    active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ('created',)
+
+    def __str__(self):
+        return f'Comment aded by {self.name} for post {self.post}'
