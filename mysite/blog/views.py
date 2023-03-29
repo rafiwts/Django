@@ -68,6 +68,7 @@ def post_detail(request, year, month, day, post):
                     'comment_form': comment_form,
                     'similar_posts': similar_posts})
 
+
 def post_share(request, post_id):
     post = get_object_or_404(Post, id=post_id, status='published') # get the post by id
     sent = False
