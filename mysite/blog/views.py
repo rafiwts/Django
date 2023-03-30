@@ -33,10 +33,10 @@ def post_list(request, tag_slug=None): # tag is optional
         posts = paginator.page(paginator.num_pages)
 
     return render(request, # render - creates a list of posts on the basis of 'posts'
-                  'blog/post/list.html', # path
-                  { 'page': page,
-                    'posts': posts,
-                    'tag': tag}) # template
+                  'blog/post/list.html', # html path
+                  {'page': page,
+                   'posts': posts,
+                   'tag': tag}) # template
 
 
 def post_detail(request, year, month, day, post):
@@ -64,9 +64,9 @@ def post_detail(request, year, month, day, post):
     return render(request,
                     'blog/post/detail.html',
                     {'post': post,
-                    'comments': comments,
-                    'comment_form': comment_form,
-                    'similar_posts': similar_posts})
+                     'comments': comments,
+                     'comment_form': comment_form,
+                     'similar_posts': similar_posts})
 
 
 def post_share(request, post_id):
