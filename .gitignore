@@ -2,5 +2,4 @@
 .env
 /Lib
 /Scripts
-/mysite/mysite/__pycache__
-/mysite/blog/__pycache__
+__pycache__
