@@ -36,8 +36,8 @@ class Post(models.Model):
     def __str__(self):
         return self.title
     
-    def get_absolute_url(self):
-        return reverse ('blog:post_detail',
+    def get_absolute_url(self): # finding url for a specific instance of a post
+        return reverse ('blog:post_detail', # returning a full path to a post
                         args=[self.publish.year,
                               self.publish.month,
                               self.publish.day,
@@ -59,4 +59,4 @@ class Comment(models.Model):
         ordering = ('created',)
 
     def __str__(self):
-        return f'Comment aded by {self.name} for post {self.post}'
+        return f'Comment added by {self.name} for post {self.post}' # how we want to print it out when we run shell
